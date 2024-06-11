@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from news.forms import CategoryForm
+from news.forms import CategoryForm, NewsForm
 from news.models import News, Category
 
 # Create your views here.
@@ -11,7 +11,7 @@ def news_details(request, id):
     context = {"news": News.objects.get(id=id)}
     return render(request, 'news_details.html', context)
 
-def categories(request):
+def categories_form(request):
     form = CategoryForm()
 
     if request.method == "POST":
@@ -23,3 +23,16 @@ def categories(request):
 
     context = {"form": form}
     return render(request, 'categories_form.html', context)
+
+def news_form(request):
+    form = NewsForm()
+
+    if request.method == "POST":
+        form = NewsForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            form.save()
+            return redirect("home-page")
+        
+    context = {"form": form}
+    return render(request, 'news_form.html', context)
