@@ -14,7 +14,8 @@
     <header class="header">
         <nav>
             <ul class="header-links">
-                {% block header-links %} {% endblock %}
+                <li><a href="{% url 'home-page' %}">Home</a></li>
+                <li><a href="{% url 'categories-form' %}">Cadastrar Categorias</a></li>
             </ul>
         </nav>
     </header>

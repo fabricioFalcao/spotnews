@@ -5,18 +5,16 @@
 Página Inicial
 {% endblock %}
 
-{% block header-links %}
-<li><a href="{% url 'home-page' %}">Home</a></li>
-{% endblock %}
-
 {% block content %}
 
 {% for news in all_news %}
 <div class="news-card">
-    <h2 class="news-title">{{ news.title }}</h2>
+    <a href="{% url 'news-details-page' news.id %}" class="news-link">
+        <h2 class="news-title">{{ news.title }}</h2>
+    </a>
     <span class="news-date">{{ news.created_at|date:"d/m/Y" }}</span>
     {% load static %}
-    <img src="{% static news.image.url %}" alt="{{ new.title }}" class="news-image">
+    <img src="{% static news.image.url %}" alt="{{ news.title }}" class="news-image">
 </div>
 {% endfor %}
 
